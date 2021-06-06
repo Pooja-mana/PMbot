@@ -202,15 +202,14 @@ def results():
       gender = req.get('queryResult').get('parameters').get('gender')
       loc = req.get('queryResult').get('parameters').get('location')
 
-
-ref = db.reference('Patients')
-ref.push(
-    { 
-      'age' : age,
-      'Name' : name,
-      'gender' : gender,
-      'location' : loc
-    })
+      ref = db.reference('Patients')
+      ref.push(
+        { 
+          'age' : age,
+          'Name' : name,
+          'gender' : gender,
+          'location' : loc
+        })
 
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
