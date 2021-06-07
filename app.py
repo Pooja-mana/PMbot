@@ -1,6 +1,6 @@
 # import flask dependencies
 from flask import Flask, request, make_response, jsonify
-import requests
+import os, signal
 # initialize the flask app
 app = Flask(__name__)
 import firebase_admin
@@ -216,6 +216,11 @@ def results():
 def webhook():
     # return response
     return make_response(jsonify(results()))
+
+@app.route('/stopServer', methods=['GET'])
+def stopServer():
+    os.kill(os.getpid(), signal.SIGINT)
+    return jsonify({ "success": True, "message": "Server is shutting down..." })
 
 # run the app
 if __name__ == '__main__':
